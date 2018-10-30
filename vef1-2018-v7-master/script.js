@@ -13,7 +13,7 @@ const GAMES_TO_PLAY = 10;
  * Eftir leik er notanda boðið að spila annan leik, ef ekki hættir forrit.
  */
 function start() {
-  alert('Markmiðið er að svara eins mörgum af 10 dæmum rétt eins hratt og mögulegt er.')
+  alert('Markmiðið er að svara eins mörgum af 10 dæmum rétt eins hratt og mögulegt er.');
   do{
     play();
   } while(confirm('spila aftur?'));
@@ -37,26 +37,26 @@ function play() {
   do {
     let rettSvar = ask();
     var finish = new Date();
-    if (rettSvar = true){
+    if (rettSvar == true){
       alert("true");
       rettSvor++;
       spilun++;
     }
-    else if (rettSvar = false){
-      alert("false")
+    else if (rettSvar == false){
+      alert("false");
       spilun++;
     }
-    else if (rettSvar = null){
+    else if (rettSvar === null){
       return alert('Leikur stöðvaður');
     }
   }
   while (spilun < GAMES_TO_PLAY) {
   }
   var finishTime = (finish-start)/1000;
-  var fT = finishTime.toFixed(2)
+  var fT = finishTime.toFixed(2);
   var medalTal = spilun/(finishTime/1000);
-  var mT = medalTal.toFixed(2)
-  alert(`Þú varst með ${spilun} rétt svör af 10 mögulegum. Heildartími þinn var ${fT} og meðalfjöldi réttra svara á sekúndu er ${mT}`);
+  var mT = medalTal.toFixed(2);
+  alert(`Þú varst með ${rettSvor} rétt svör af 10 mögulegum. Heildartími þinn var ${fT} og meðalfjöldi réttra svara á sekúndu er ${mT}`);
 }
 
 
@@ -85,7 +85,7 @@ function ask() {
       j = randomNumber(1,100);
       i = randomNumber(1,100);
       var answer = prompt(`hvað er ${i}+${j} ?`);
-      if(parseGuess(answer) == i+j){
+      if(parseGuess(answer) === i+j){
         return true;
         }
       else if (parseGuess(answer) == null){
@@ -98,7 +98,7 @@ function ask() {
       j = randomNumber(1,100);
       i = randomNumber(1,100);
       answer = prompt(`hvað er ${i}-${j} ?`);
-      if(parseGuess(answer) == i-j){
+      if(parseGuess(answer) === i-j){
         return true;
         }
       else if (parseGuess(answer) == null){
@@ -109,9 +109,9 @@ function ask() {
       }
     case "/":
       j = randomNumber(2,10);
-      i = randomNumber(2,10);
-      answer = prompt(`hvað er ${i}/${j} ?`);
-      if(parseGuess(answer) == i/j){
+      i = j*randomNumber(2,10);
+      answer = prompt(`hvað er ${j}/${i} ?`);
+      if(parseGuess(answer) === j/i){
         return true;
         }
       else if (parseGuess(answer) == null){
@@ -124,7 +124,7 @@ function ask() {
       j = randomNumber(1,10);
       i = randomNumber(1,10);
       answer = prompt(`hvað er ${i}*${j} ?`);
-      if(parseGuess(answer) == i/j){
+      if(parseGuess(answer) === i*j){
         return true;
         }
       else if (parseGuess(answer) == null){
@@ -136,6 +136,13 @@ function ask() {
   }
 }
 
+function parseGuess(input) {
+  const parsed = parseInt (input, 10);
+  if (isNaN(parsed)) {
+    return null;
+  }
+  return parsed;
+}
 /**
  * Skilar tölu af handahófi á bilinu [min, max]
  */
